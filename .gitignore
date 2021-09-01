@@ -15,3 +15,5 @@
 # gradle
 gradle/
 gradlew*
+
+app/src/main/res/values/api_key.xml
