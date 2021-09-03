@@ -19,17 +19,19 @@ package com.udacity.asteroidradar.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.udacity.asteroidradar.data.AsteroidDatabaseDao
 
 /**
  * This is pretty much boiler plate code for a ViewModel Factory.
  *
  * Provides the API key to the ViewModel.
  */
-class MainViewModelFactory(private val api_key: String) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val api_key: String, private val dao: AsteroidDatabaseDao ) :
+ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(api_key) as T
+            return MainViewModel(api_key, dao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

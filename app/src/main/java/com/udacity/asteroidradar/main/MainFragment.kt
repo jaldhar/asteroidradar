@@ -7,13 +7,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.data.AsteroidDatabase
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
-
-
     private val viewModel: MainViewModel by lazy {
-        val viewModelFactory = MainViewModelFactory(getString(R.string.api_key))
+        val viewModelFactory = MainViewModelFactory(getString(R.string.api_key),
+            AsteroidDatabase.getInstance(this.requireContext()).dao)
         ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.feed.observe(viewLifecycleOwner, { asteroids ->
-            asteroids.forEach {
+            asteroids?.forEach {
                 Log.i("Asteroid Radar","${it.codename} ${it.closeApproachDate}\n")
             }
         })
@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
                 binding.statusLoadingWheel.visibility = View.GONE
             }
         })
+
         setHasOptionsMenu(true)
 
         return binding.root
