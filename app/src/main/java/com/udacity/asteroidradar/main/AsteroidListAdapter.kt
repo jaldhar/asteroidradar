@@ -12,11 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AsteroidListAdapter : ListAdapter<Asteroid, AsteroidCardHolder>(AsteroidDiffCallback()) {
+class AsteroidListAdapter(val clickListener: AsteroidListClickListener) :
+    ListAdapter<Asteroid, AsteroidCardHolder>(AsteroidDiffCallback()) {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     override fun onBindViewHolder(holder: AsteroidCardHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -29,6 +30,7 @@ class AsteroidListAdapter : ListAdapter<Asteroid, AsteroidCardHolder>(AsteroidDi
             }
         }
     }
+
 }
 
 class AsteroidDiffCallback : DiffUtil.ItemCallback<Asteroid>() {
@@ -43,8 +45,9 @@ class AsteroidDiffCallback : DiffUtil.ItemCallback<Asteroid>() {
 
 class AsteroidCardHolder private constructor(private val binding: CardAsteroidBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(asteroid: Asteroid) {
+    fun bind(asteroid: Asteroid, clickListener: AsteroidListClickListener) {
         binding.asteroid = asteroid
+        binding.clickListener = clickListener
         binding.executePendingBindings()
     }
 
@@ -56,4 +59,8 @@ class AsteroidCardHolder private constructor(private val binding: CardAsteroidBi
             return AsteroidCardHolder(binding)
         }
     }
+}
+
+class AsteroidListClickListener(val clickListener: (asteroid: Asteroid) -> Unit) {
+    fun onClick(asteroid: Asteroid) = clickListener(asteroid)
 }

@@ -20,4 +20,16 @@ class MainViewModel(key: String, dao: AsteroidDatabaseDao) : ViewModel() {
             repository.refreshAsteroids()
         }
     }
+
+    private val _navigateToAsteroidDetail = MutableLiveData<Asteroid?>()
+    val navigateToAsteroidDetail
+        get() = _navigateToAsteroidDetail
+
+    fun onAsteroidClicked(asteroid: Asteroid) {
+        _navigateToAsteroidDetail.value = asteroid
+    }
+
+    fun onAsteroidDetailNavigated() {
+        _navigateToAsteroidDetail.value = null
+    }
 }

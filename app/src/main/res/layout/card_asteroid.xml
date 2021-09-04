@@ -5,13 +5,17 @@
         <variable
             name="asteroid"
             type="com.udacity.asteroidradar.domain.Asteroid" />
+        <variable
+            name="clickListener"
+            type="com.udacity.asteroidradar.main.AsteroidListClickListener" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/half_margin"
         app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation">
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:onClick="@{() -> clickListener.onClick(asteroid)}">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
