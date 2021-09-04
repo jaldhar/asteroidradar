@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AsteroidListAdapter(val clickListener: AsteroidListClickListener) :
+class AsteroidListAdapter(private val clickListener: AsteroidListClickListener) :
     ListAdapter<Asteroid, AsteroidCardHolder>(AsteroidDiffCallback()) {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 

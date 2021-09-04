@@ -16,6 +16,7 @@
 
         <FrameLayout
             android:id="@+id/activity_main_image_of_the_day_layout"
+            android:contentDescription="@string/this_is_nasa_s_picture_of_day_showing_nothing_yet"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             app:layout_constraintEnd_toEndOf="parent"
