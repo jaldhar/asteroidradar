@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DefaultText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="EmphasizedText" parent="DefaultText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
