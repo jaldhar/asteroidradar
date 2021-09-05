@@ -15,7 +15,7 @@ import com.udacity.asteroidradar.main.NeoWSAPIStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.lang.Exception
+import kotlin.Exception
 
 class AsteroidRepository( private val key: String, private val dao: AsteroidDatabaseDao) {
     val asteroids : LiveData<List<Asteroid>> =
@@ -26,6 +26,16 @@ class AsteroidRepository( private val key: String, private val dao: AsteroidData
     private val _status = MutableLiveData<NeoWSAPIStatus>()
         val status: LiveData<NeoWSAPIStatus>
             get() = _status
+
+    suspend fun deleteOldAsteroids() {
+        withContext(Dispatchers.IO) {
+            try {
+                dao.deleteOldAsteroids()
+            } catch (e: Exception) {
+                Log.e("Asteroid Radar", e.message.toString())
+            }
+        }
+    }
 
     suspend fun refreshAsteroids() {
         var feed : ArrayList<NetworkAsteroid>
