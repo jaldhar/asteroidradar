@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         })
         binding.asteroidRecycler.adapter = adapter
 
-        viewModel.feed.observe(viewLifecycleOwner, { asteroids ->
+        viewModel.asteroids.observe(viewLifecycleOwner, { asteroids ->
             asteroids?.let {
                 adapter.changeList(asteroids)
             }
@@ -67,6 +67,14 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.show_week -> { viewModel.setSortType(SortType.WEEK) }
+            R.id.show_saved -> { viewModel.setSortType(SortType.SAVED) }
+            R.id.show_today -> { viewModel.setSortType(SortType.TODAY) }
+            else -> {
+                return false
+            }
+        }
         return true
     }
 }

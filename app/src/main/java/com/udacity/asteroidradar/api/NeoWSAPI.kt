@@ -15,7 +15,10 @@ private val retrofit = Retrofit.Builder()
 
 interface NeoWSAPIService {
     @GET("/neo/rest/v1/feed")
-    suspend fun getFeed(@Query("api_key")key: String) : String
+    suspend fun getFeed(
+        @Query("start_date") startDate: String,
+        @Query("api_key") key: String
+    ) : String
 }
 
 object NeoWSAPI {
