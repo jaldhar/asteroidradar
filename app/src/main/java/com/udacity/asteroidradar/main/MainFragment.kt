@@ -2,13 +2,14 @@ package com.udacity.asteroidradar.main
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.data.AsteroidDatabase
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
+import com.udacity.asteroidradar.utils.NetworkStatus
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -37,13 +38,33 @@ class MainFragment : Fragment() {
             }
         })
 
-        viewModel.status.observe(viewLifecycleOwner, {
-            if (it == NeoWSAPIStatus.LOADING) {
+        viewModel.neoNWSStatus.observe(viewLifecycleOwner, {
+            if (it == NetworkStatus.LOADING) {
                 binding.statusLoadingWheel.visibility = View.VISIBLE
 
             } else {
-                if (it == NeoWSAPIStatus.ERROR) {
-                    Toast.makeText(context, getString(R.string.network_error), Toast.LENGTH_SHORT).show()
+                if (it == NetworkStatus.ERROR) {
+                    Snackbar.make(requireView(), R.string.neonws_network_error, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry) {
+                            viewModel.retryRefreshAsteroidList()
+                        }
+                        .show()
+                }
+                binding.statusLoadingWheel.visibility = View.GONE
+            }
+        })
+
+        viewModel.potdStatus.observe(viewLifecycleOwner, {
+            if (it == NetworkStatus.LOADING) {
+                binding.statusLoadingWheel.visibility = View.VISIBLE
+
+            } else {
+                if (it == NetworkStatus.ERROR) {
+                    Snackbar.make(requireView(), R.string.potd_network_error, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry) {
+                            viewModel.retryRefreshPictureOfTheDay()
+                        }
+                        .show()
                 }
                 binding.statusLoadingWheel.visibility = View.GONE
             }

@@ -6,14 +6,16 @@ import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import kotlinx.coroutines.launch
 
-enum class NeoWSAPIStatus { LOADING, ERROR, DONE }
 enum class SortType { WEEK, TODAY, SAVED }
 
 class MainViewModel(key: String, dao: AsteroidDatabaseDao) : ViewModel() {
     private val repository = AsteroidRepository(key, dao)
     private val sortType = MutableLiveData<SortType>()
 
-    val status = repository.status
+    val neoNWSStatus = repository.neoNWSStatus
+
+    val potdStatus = repository.potdStatus
+    val pictureOfTheDay = repository.pictureOfTheTheDay
 
     val asteroids = Transformations.switchMap(sortType) {
         repository.getSortedAsteroidList(it)
@@ -22,6 +24,7 @@ class MainViewModel(key: String, dao: AsteroidDatabaseDao) : ViewModel() {
     init {
         viewModelScope.launch {
             repository.refreshAsteroids()
+            repository.refreshPictureOfTheDay()
         }
         sortType.value = SortType.WEEK
     }
@@ -43,4 +46,17 @@ class MainViewModel(key: String, dao: AsteroidDatabaseDao) : ViewModel() {
             sortType.value = type
         }
     }
+
+    fun retryRefreshAsteroidList() {
+        viewModelScope.launch {
+            repository.refreshAsteroids()
+        }
+    }
+
+    fun retryRefreshPictureOfTheDay() {
+        viewModelScope.launch {
+            repository.refreshPictureOfTheDay()
+        }
+    }
+
 }
