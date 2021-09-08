@@ -1,9 +1,18 @@
-# Purpose of this Folder
+# Asteroid Radar
 
-This folder should contain the scaffolded project files to get a student started on their project. This repo will be added to the Classroom for students to use, so please do not have any solutions in this folder.
+This is my submission for the "Building Features for Android App" project of the Udacity Android
+Kotlin Developer nanodegree.
 
-## Note: Android Kotlin Gradle Update
-Use the updated Gradle version in the `~/gradle/wrapper/gradle-wrapper.properties` file:
-```
-distributionUrl = https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
-```
+In order to compile this app you will need an API key from [NASA](https://api.nasa.gov/).
+Once you have it create a file called `app/src/main/res/values/api_key.xml`.
+It should look like this:
+
+    <resources>
+        <string name="api_key">YOUR API KEY</string>
+    </resources>
+
+**DO NOT EVER commit this file into a public version control repository!**
+
+(C) Jaldhar H. Vyas <jaldhar@braincells.com>
+"Do What Thou Wilt" Shall Be The Whole of the License.  (Except you may not use this code to cheat
+on Udacity coursework.)```
