@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Radar D\'astéroïdes</string>
+
+    <string name="next_week_asteroids">Voir les astéroïdes de la semaine</string>
+    <string name="today_asteroids">Voir les astéroïdes d\'aujourd\'hui</string>
+    <string name="saved_asteroids">Voir les astéroïdes enregistrés</string>
+    <string name="close_approach_data_title">Date d\'approche proche</string>
+    <string name="absolute_magnitude_title">Magnitude absolue</string>
+    <string name="estimated_diameter_title">Diamètre estimé</string>
+    <string name="relative_velocity_title">Vitesse relative</string>
+    <string name="distance_from_earth_title">Distance de la terre</string>
+    <string name="astronomical_unit_format">%f ua</string>
+    <string name="km_unit_format">%f km</string>
+    <string name="km_s_unit_format">%f km/s</string>
+    <string name="image_of_the_day">Image du jour</string>
+    <string name="astronomica_unit_explanation">L\'unité astronomique (ua) est une unité de longueur, à peu près la distance de la Terre au Soleil et égale à environ 150 millions de kilomètres (93 millions de miles)</string>
+    <string name="astronomical_unit_explanation_button">Définition de l\'unité astronomique</string>
+    <string name="potentially_hazardous_asteroid_image">Image d\'astéroïde potentiellement dangereux</string>
+    <string name="not_hazardous_asteroid_image">Image d\'astéroïde non dangereux</string>
+    <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">C\'est l\'image du jour de la NASA, ne montrant rien encore</string>
+    <string name="nasa_picture_of_day_content_description_format">L\'image du jour de la NASA : %s</string>
+    <string name="neonws_network_error">Impossible d\'actualiser la liste des astéroïdes. Êtes-vous hors ligne?</string>
+    <string name="potd_network_error">Impossible d\'actualiser l\'image du jour. Êtes-vous hors ligne?</string>
+    <string name="retry">Réessayez</string>
+</resources>
